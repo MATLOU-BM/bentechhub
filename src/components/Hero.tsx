@@ -92,7 +92,7 @@ export default function Hero() {
         <input type="email" name="email" placeholder="Email" required className="border p-2 rounded"/>
         <input type="text" name="location" placeholder="Location" required className="border p-2 rounded"/>
         <select name="training" required className="border p-2 rounded">
-          <option value="">Completed BenTechHub / Cisco training?</option>
+          <option value="">Completed  NetDreamTeam / Cisco training?</option>
           <option value="Yes">Yes</option>
           <option value="No">No</option>
         </select>
