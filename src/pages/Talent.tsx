@@ -1,18 +1,14 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
 import {
   FaUserCircle,
   FaEnvelope,
   FaGraduationCap,
   FaBriefcase,
   FaWhatsapp,
-  FaLinkedin,
-  FaStar,
-  FaNetworkWired,
   FaShieldAlt,
-  FaCode,
+  FaNetworkWired,
 } from "react-icons/fa";
 import Hero from "@/components/Hero";
 
@@ -35,9 +31,7 @@ const talent = [
     email: "29.Mmapitsi57@gmail.com",
     role: "Cybersecurity Student",
     bio: "Enrolled in Cybersecurity course. Focused on threat detection and security best practices.",
-    skills: [
-      { label: "Cybersecurity", icon: FaShieldAlt },
-    ],
+    skills: [{ label: "Cybersecurity", icon: FaShieldAlt }],
     experience: "Student",
     availability: "Part-time",
   },
@@ -46,9 +40,7 @@ const talent = [
     email: "30.wissem.kaouss@efrei.net",
     role: "Cybersecurity Graduate",
     bio: "Completed Cybersecurity course. Skilled in security analysis and risk assessment.",
-    skills: [
-      { label: "Cybersecurity", icon: FaShieldAlt },
-    ],
+    skills: [{ label: "Cybersecurity", icon: FaShieldAlt }],
     experience: "0-1 years",
     availability: "Immediate",
   },
@@ -81,9 +73,7 @@ const talent = [
     email: "33.karanmahrani2004@gmail.com",
     role: "Networking Student",
     bio: "Enrolled in Networking Basics course. Focused on network configuration and troubleshooting.",
-    skills: [
-      { label: "Networking Basics", icon: FaNetworkWired },
-    ],
+    skills: [{ label: "Networking Basics", icon: FaNetworkWired }],
     experience: "Student",
     availability: "Part-time",
   },
@@ -104,9 +94,7 @@ const talent = [
     email: "35.Mpholeon47@gmail.com",
     role: "Networking Graduate",
     bio: "Completed Networking Basics course. Skilled in network setup and maintenance.",
-    skills: [
-      { label: "Networking Basics", icon: FaNetworkWired },
-    ],
+    skills: [{ label: "Networking Basics", icon: FaNetworkWired }],
     experience: "0-1 years",
     availability: "Immediate",
   },
@@ -139,9 +127,7 @@ const talent = [
     email: "38.Ronewavhulahani123@gmail.com",
     role: "Networking Graduate",
     bio: "Completed Networking Basics course. Passionate about network infrastructure.",
-    skills: [
-      { label: "Networking Basics", icon: FaNetworkWired },
-    ],
+    skills: [{ label: "Networking Basics", icon: FaNetworkWired }],
     experience: "0-1 years",
     availability: "Immediate",
   },
@@ -174,9 +160,7 @@ const talent = [
     email: "41.khanyisashikwambana@outlook.com",
     role: "Cybersecurity Graduate",
     bio: "Completed Cybersecurity course. Interested in security operations.",
-    skills: [
-      { label: "Cybersecurity", icon: FaShieldAlt },
-    ],
+    skills: [{ label: "Cybersecurity", icon: FaShieldAlt }],
     experience: "0-1 years",
     availability: "Immediate",
   },
@@ -194,40 +178,54 @@ const talent = [
   },
 ];
 
-// Circular Profile Card Component
-const ProfileCircle = ({ talent: t, onClick }: any) => {
-  // Get initials for avatar
-  const initials = t.name.split(" ").map((n: string) => n[0]).join("").toUpperCase();
+const ProfileCircle = ({
+  talent: t,
+  onClick,
+}: {
+  talent: (typeof talent)[number];
+  onClick: (t: (typeof talent)[number]) => void;
+}) => {
+  const initials = t.name
+    .split(" ")
+    .map((n: string) => n[0])
+    .join("")
+    .toUpperCase();
 
   return (
     <motion.button
       onClick={() => onClick(t)}
-      whileHover={{ scale: 1.05, y: -5 }}
+      whileHover={{ scale: 1.05, y: -4 }}
       whileTap={{ scale: 0.98 }}
-      className="flex flex-col items-center gap-2 group"
+      className="flex flex-col items-center gap-2 group w-full"
     >
-      {/* Circular Avatar */}
       <div className="relative">
-        <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-br from-sky-500 to-sky-700 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all">
-          <span className="text-white text-xl md:text-2xl font-bold">
+        <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-br from-sky-500 to-sky-700 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all">
+          <span className="text-white text-lg sm:text-xl md:text-2xl font-bold">
             {initials}
           </span>
         </div>
-        {/* Network indicator light */}
+
         <motion.div
           className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-white"
           animate={{ opacity: [0.5, 1, 0.5] }}
           transition={{ duration: 1.5, repeat: Infinity }}
         />
       </div>
-      
-      {/* Name below */}
-      <div className="text-center">
-        <p className="font-semibold text-gray-800 text-sm md:text-base">{t.name}</p>
-        <p className="text-xs text-gray-500">{t.role}</p>
-        <div className="flex gap-1 justify-center mt-1">
+
+      <div className="text-center px-1">
+        <p className="font-semibold text-gray-800 text-xs sm:text-sm md:text-base leading-tight">
+          {t.name}
+        </p>
+        <p className="text-[10px] sm:text-xs text-gray-500 leading-tight mt-1">
+          {t.role}
+        </p>
+
+        <div className="flex gap-1 justify-center mt-1 flex-wrap">
           {t.skills.slice(0, 2).map((skill: any, idx: number) => (
-            <span key={idx} className="text-[8px] px-1.5 py-0.5 rounded-full bg-sky-100 text-sky-600">
+            <span
+              key={idx}
+              className="text-[8px] sm:text-[9px] px-1.5 py-0.5 rounded-full bg-sky-100 text-sky-600"
+            >
               {skill.label.split(" ")[0]}
             </span>
           ))}
@@ -237,9 +235,81 @@ const ProfileCircle = ({ talent: t, onClick }: any) => {
   );
 };
 
-// Modal Component for Talent Details
+const TalentCard = ({
+  talent: t,
+  onClick,
+}: {
+  talent: (typeof talent)[number];
+  onClick: (t: (typeof talent)[number]) => void;
+}) => {
+  const initials = t.name
+    .split(" ")
+    .map((n: string) => n[0])
+    .join("")
+    .toUpperCase();
+
+  return (
+    <motion.button
+      whileHover={{ y: -4 }}
+      whileTap={{ scale: 0.98 }}
+      onClick={() => onClick(t)}
+      className="w-full text-left bg-white rounded-2xl border border-sky-100 shadow-md hover:shadow-lg transition-all p-4"
+    >
+      <div className="flex items-start gap-3">
+        <div className="relative flex-shrink-0">
+          <div className="w-14 h-14 rounded-full bg-gradient-to-br from-sky-500 to-sky-700 flex items-center justify-center shadow-md">
+            <span className="text-white text-sm font-bold">{initials}</span>
+          </div>
+          <span className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-white" />
+        </div>
+
+        <div className="min-w-0 flex-1">
+          <div className="flex items-start justify-between gap-2">
+            <div>
+              <h3 className="text-sm font-bold text-sky-900 leading-tight">
+                {t.name}
+              </h3>
+              <p className="text-xs text-gray-500 mt-0.5">{t.role}</p>
+            </div>
+
+            <span
+              className={`text-[10px] px-2 py-1 rounded-full whitespace-nowrap ${
+                t.availability === "Immediate"
+                  ? "bg-green-100 text-green-700"
+                  : "bg-amber-100 text-amber-700"
+              }`}
+            >
+              {t.availability}
+            </span>
+          </div>
+
+          <p className="text-xs text-gray-600 mt-2 leading-relaxed line-clamp-3">
+            {t.bio}
+          </p>
+
+          <div className="flex flex-wrap gap-1.5 mt-3">
+            {t.skills.map((skill: any, idx: number) => (
+              <span
+                key={idx}
+                className="text-[10px] px-2 py-1 rounded-full bg-sky-100 text-sky-700 flex items-center gap-1"
+              >
+                <skill.icon size={10} />
+                {skill.label}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </motion.button>
+  );
+};
+
 const TalentModal = ({ talent: t, onClose }: any) => {
   if (!t) return null;
+
+  const adminWhatsappMessage = encodeURIComponent(
+    `Hi! I'm interested in ${t.name}'s profile from BenTechHub Talent. Please assist me with the next steps.`
+  );
 
   return (
     <motion.div
@@ -250,46 +320,48 @@ const TalentModal = ({ talent: t, onClose }: any) => {
       onClick={onClose}
     >
       <motion.div
-        initial={{ scale: 0.9, opacity: 0, y: 20 }}
+        initial={{ scale: 0.95, opacity: 0, y: 20 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
-        exit={{ scale: 0.9, opacity: 0, y: 20 }}
-        className="bg-white rounded-2xl max-w-md w-full overflow-hidden shadow-2xl"
+        exit={{ scale: 0.95, opacity: 0, y: 20 }}
+        className="bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header with gradient */}
-        <div className="bg-gradient-to-r from-sky-600 to-sky-700 p-6 text-white text-center relative">
-          <div className="w-24 h-24 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3">
-            <span className="text-white text-3xl font-bold">
-              {t.name.split(" ").map((n: string) => n[0]).join("").toUpperCase()}
+        <div className="bg-gradient-to-r from-sky-600 to-sky-700 p-5 sm:p-6 text-white text-center relative">
+          <div className="w-20 h-20 sm:w-24 sm:h-24 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3">
+            <span className="text-white text-2xl sm:text-3xl font-bold">
+              {t.name
+                .split(" ")
+                .map((n: string) => n[0])
+                .join("")
+                .toUpperCase()}
             </span>
           </div>
-          <h3 className="text-xl font-bold">{t.name}</h3>
+
+          <h3 className="text-lg sm:text-xl font-bold">{t.name}</h3>
           <p className="text-sky-100 text-sm">{t.role}</p>
-          
-          {/* Availability badge */}
+
           <div className="absolute top-4 right-4">
-            <span className={`text-xs px-2 py-1 rounded-full ${
-              t.availability === "Immediate" 
-                ? "bg-green-500 text-white" 
-                : "bg-yellow-500 text-white"
-            }`}>
+            <span
+              className={`text-[10px] sm:text-xs px-2 py-1 rounded-full ${
+                t.availability === "Immediate"
+                  ? "bg-green-500 text-white"
+                  : "bg-yellow-500 text-white"
+              }`}
+            >
               {t.availability}
             </span>
           </div>
         </div>
 
-        {/* Content */}
-        <div className="p-6">
-          {/* Bio */}
+        <div className="p-5 sm:p-6">
           <div className="mb-4">
             <h4 className="font-semibold text-sky-900 mb-2 flex items-center gap-2">
               <FaUserCircle className="text-sky-500" />
               About
             </h4>
-            <p className="text-sm text-gray-600">{t.bio}</p>
+            <p className="text-sm text-gray-600 leading-relaxed">{t.bio}</p>
           </div>
 
-          {/* Skills */}
           <div className="mb-4">
             <h4 className="font-semibold text-sky-900 mb-2 flex items-center gap-2">
               <FaGraduationCap className="text-sky-500" />
@@ -308,7 +380,6 @@ const TalentModal = ({ talent: t, onClose }: any) => {
             </div>
           </div>
 
-          {/* Experience */}
           <div className="mb-4">
             <h4 className="font-semibold text-sky-900 mb-2 flex items-center gap-2">
               <FaBriefcase className="text-sky-500" />
@@ -317,21 +388,21 @@ const TalentModal = ({ talent: t, onClose }: any) => {
             <p className="text-sm text-gray-600">{t.experience}</p>
           </div>
 
-          {/* Contact Buttons */}
-          <div className="space-y-2 mt-4">
+          <div className="space-y-2 mt-5">
             <a
               href={`mailto:${t.email}`}
-              className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-2.5 rounded-xl flex items-center justify-center gap-2 transition-all"
+              className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-3 rounded-xl flex items-center justify-center gap-2 transition-all text-sm break-all px-3"
             >
               <FaEnvelope size={14} /> {t.email}
             </a>
+
             <a
-              href={`https://wa.me/${t.email.split("@")[0]}?text=Hi!%20I'm%20interested%20in%20your%20profile%20from%20BenTechHub%20Talent.%20Please%20contact%20me.`}
+              href={`[wa.me](https://wa.me/27672033731?text=${adminWhatsappMessage})`}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-semibold py-2.5 rounded-xl flex items-center justify-center gap-2 transition-all"
+              className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-semibold py-3 rounded-xl flex items-center justify-center gap-2 transition-all text-sm"
             >
-              <FaWhatsapp size={16} /> Contact on WhatsApp
+              <FaWhatsapp size={16} /> Request Introduction
             </a>
           </div>
 
@@ -348,78 +419,101 @@ const TalentModal = ({ talent: t, onClose }: any) => {
 };
 
 function Talent() {
-  const navigate = useNavigate();
   const [showAll, setShowAll] = useState(false);
   const [selectedTalent, setSelectedTalent] = useState<any>(null);
 
   const firstRow = talent.slice(0, Math.ceil(talent.length / 2));
   const secondRow = talent.slice(Math.ceil(talent.length / 2));
+  const previewTalent = talent.slice(0, 6);
 
   return (
     <section className="bg-white">
-      {/* HERO SECTION - Imported */}
       <Hero />
 
       {/* INTRO */}
-      <div className="container mx-auto px-6 mt-12 mb-16 text-center">
+      <div className="container mx-auto px-4 sm:px-6 mt-10 md:mt-12 mb-12 md:mb-16 text-center">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-lg text-gray-700 max-w-3xl mx-auto"
+          className="text-base sm:text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed"
         >
           Our graduates are equipped with <strong>real-world skills</strong> in
-          networking, cybersecurity, and cloud technologies — ready to
+          networking, cybersecurity, and cloud technologies - ready to
           contribute from day one.
         </motion.p>
       </div>
 
-      {/* SCROLL PREVIEW - Circular Profiles */}
+      {/* MOBILE PREVIEW */}
       {!showAll && (
-        <div className="mb-20 space-y-8 overflow-hidden">
-          {/* First Row */}
-          <motion.div
-            className="flex gap-8 items-center justify-center"
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
-            style={{ width: "fit-content" }}
-          >
-            {[...firstRow, ...firstRow].map((t, i) => (
-              <ProfileCircle key={i} talent={t} onClick={setSelectedTalent} />
-            ))}
-          </motion.div>
+        <>
+          <div className="md:hidden container mx-auto px-4 sm:px-6 mb-14">
+            <div className="grid grid-cols-1 gap-4">
+              {previewTalent.map((t, i) => (
+                <TalentCard key={i} talent={t} onClick={setSelectedTalent} />
+              ))}
+            </div>
 
-          {/* Second Row */}
-          <motion.div
-            className="flex gap-8 items-center justify-center"
-            animate={{ x: ["-50%", "0%"] }}
-            transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
-            style={{ width: "fit-content" }}
-          >
-            {[...secondRow, ...secondRow].map((t, i) => (
-              <ProfileCircle key={i} talent={t} onClick={setSelectedTalent} />
-            ))}
-          </motion.div>
-
-          <div className="text-center mt-10">
-            <Button onClick={() => setShowAll(true)} className="bg-sky-500 hover:bg-sky-600">
-              View All Talent
-            </Button>
+            <div className="text-center mt-8">
+              <Button
+                onClick={() => setShowAll(true)}
+                className="bg-sky-500 hover:bg-sky-600 w-full sm:w-auto"
+              >
+                View All Talent
+              </Button>
+            </div>
           </div>
-        </div>
+
+          {/* DESKTOP MARQUEE PREVIEW */}
+          <div className="hidden md:block mb-20 space-y-8 overflow-hidden">
+            <motion.div
+              className="flex gap-8 items-center"
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
+              style={{ width: "max-content" }}
+            >
+              {[...firstRow, ...firstRow].map((t, i) => (
+                <ProfileCircle key={i} talent={t} onClick={setSelectedTalent} />
+              ))}
+            </motion.div>
+
+            <motion.div
+              className="flex gap-8 items-center"
+              animate={{ x: ["-50%", "0%"] }}
+              transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
+              style={{ width: "max-content" }}
+            >
+              {[...secondRow, ...secondRow].map((t, i) => (
+                <ProfileCircle key={i} talent={t} onClick={setSelectedTalent} />
+              ))}
+            </motion.div>
+
+            <div className="text-center mt-10">
+              <Button
+                onClick={() => setShowAll(true)}
+                className="bg-sky-500 hover:bg-sky-600"
+              >
+                View All Talent
+              </Button>
+            </div>
+          </div>
+        </>
       )}
 
-      {/* FULL GRID - Circular Profiles */}
+      {/* FULL GRID */}
       {showAll && (
-        <div className="container mx-auto px-6 mb-20">
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8 justify-items-center">
+        <div className="container mx-auto px-4 sm:px-6 mb-16 md:mb-20">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5 sm:gap-6 md:gap-8 justify-items-center">
             {talent.map((t, i) => (
               <ProfileCircle key={i} talent={t} onClick={setSelectedTalent} />
             ))}
           </div>
 
           <div className="text-center mt-10">
-            <Button onClick={() => setShowAll(false)} className="bg-sky-500 hover:bg-sky-600">
+            <Button
+              onClick={() => setShowAll(false)}
+              className="bg-sky-500 hover:bg-sky-600 w-full sm:w-auto"
+            >
               Back to Preview
             </Button>
           </div>
@@ -427,28 +521,34 @@ function Talent() {
       )}
 
       {/* CTA */}
-      <div className="container mx-auto px-6 mb-20">
+      <div className="container mx-auto px-4 sm:px-6 mb-16 md:mb-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center border rounded-3xl p-10 bg-gradient-to-br from-sky-50 to-white"
+          className="text-center border rounded-3xl p-6 sm:p-8 md:p-10 bg-gradient-to-br from-sky-50 to-white"
         >
-          <h2 className="text-2xl font-bold text-sky-900 mb-4">
+          <h2 className="text-xl sm:text-2xl font-bold text-sky-900 mb-4">
             Are you a recruiter?
           </h2>
-          <p className="text-gray-600 mb-6 max-w-md mx-auto">
-            Access a pool of trained networking, cloud and cybersecurity professionals ready to work.
+
+          <p className="text-sm sm:text-base text-gray-600 mb-6 max-w-md mx-auto leading-relaxed">
+            Access a pool of trained networking, cloud and cybersecurity
+            professionals ready to work.
           </p>
-          <a href="https://wa.me/27672033731" target="_blank">
-            <Button className="bg-gradient-to-r from-sky-600 to-sky-700 hover:from-sky-700 hover:to-sky-800">
+
+          <a
+            href="[wa.me](https://wa.me/27672033731)"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button className="bg-gradient-to-r from-sky-600 to-sky-700 hover:from-sky-700 hover:to-sky-800 w-full sm:w-auto">
               Contact BenTechHub
             </Button>
           </a>
         </motion.div>
       </div>
 
-      {/* Talent Modal */}
       <AnimatePresence>
         {selectedTalent && (
           <TalentModal
