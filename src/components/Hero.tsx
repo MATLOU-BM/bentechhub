@@ -1,120 +1,468 @@
 import { useState } from "react";
-import FormModal from "../components/FormModalFormModal"; 
+import FormModal from "../components/FormModalFormModal";
 import { motion } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
-import introVideo from "@/assets/welcome.mp4";
+import {
+  ShieldCheck,
+  Wifi,
+  Server,
+  Headphones,
+  ArrowRight,
+} from "lucide-react";
+
+// import introVideo from "@/assets/welcome.mp4";
+// Replace this with the image I'll generate later
+ import heroImage from "@/assets/hero.png";
 
 export default function Hero() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Form modal states
   const [isAcademyOpen, setAcademyOpen] = useState(false);
   const [isTalentOpen, setTalentOpen] = useState(false);
 
-  let buttonText = "Explore Services";
+  let buttonText = "View Managed Services";
   let buttonAction = () => navigate("/services");
 
   if (location.pathname === "/academy") {
     buttonText = "Academy Application";
-    buttonAction = () => setAcademyOpen(true); // open modal
+    buttonAction = () => setAcademyOpen(true);
   }
 
   if (location.pathname === "/talent") {
     buttonText = "Talent Application";
-    buttonAction = () => setTalentOpen(true); // open modal
+    buttonAction = () => setTalentOpen(true);
   }
 
-  // Handle submit (replace with emailjs or Google Forms API)
-  const handleSubmitAcademy = (e) => {
+  const handleSubmitAcademy = (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Academy form submitted!"); 
+    alert("Academy Application Submitted");
     setAcademyOpen(false);
   };
 
-  const handleSubmitTalent = (e) => {
+  const handleSubmitTalent = (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Talent form submitted!"); 
+    alert("Talent Application Submitted");
     setTalentOpen(false);
   };
 
   return (
-    <section className="relative min-h-[75vh] flex flex-col justify-center overflow-hidden">
-      <video src={introVideo} autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" />
+    <section className="relative overflow-hidden bg-[#071A33] min-h-screen flex items-center">
 
-      <div className="container mx-auto px-6 relative z-10">
-        <motion.div className="flex flex-col items-start gap-6" initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}>
-          
-          <motion.button
-            onClick={buttonAction}
-            className="px-8 py-3 rounded-xl text-white text-base font-medium bg-white/10 backdrop-blur-lg border border-white/20 hover:bg-sky-500/30 hover:border-sky-400/40 transition-all duration-300 hover:scale-105"
+      {/* Background Video */}
+
+     <img
+              src={heroImage}
+              alt="Enterprise Networking"
+              className="absolute inset-0 w-full h-full object-cover opacity-25"
+            />
+
+      {/* Dark Overlay */}
+
+      <div className="absolute inset-0 bg-gradient-to-r from-[#071A33]/45 via-[#071A33]/50 to-[#071A33]/60" />
+
+      <div className="relative z-20 max-w-7xl mx-auto px-6 pt-36 pb-20">
+
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+
+          {/* LEFT SIDE */}
+
+          <motion.div
+            initial={{ opacity: 0, x: -60 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: .8 }}
           >
-            {buttonText}
-          </motion.button>
 
-          <motion.a href="https://chat.whatsapp.com/DetiTe2ZWDU3WigYD5sTr1" target="_blank" rel="noopener noreferrer">
-            <button className="px-8 py-3 rounded-xl text-white text-base font-medium bg-white/5 backdrop-blur-lg border border-white/20 hover:bg-white/20 hover:border-white/40 transition-all duration-300 hover:scale-105">
-              Join Community
-            </button>
-          </motion.a>
-        </motion.div>
+            {/* Small Heading */}
+
+            <p className="uppercase tracking-widest text-green-400 font-semibold mb-5">
+              Powering Smarter Businesses
+            </p>
+
+            {/* Heading */}
+
+            <h1 className="text-5xl lg:text-6xl font-black leading-tight text-white">
+
+              Enterprise Networking,
+              <br />
+
+              CCTV &
+              <br />
+
+              Infrastructure
+              <span className="text-green-400"> Solutions</span>
+
+            </h1>
+
+            {/* Description */}
+
+            <p className="text-gray-300 text-lg mt-8 leading-8 max-w-xl">
+
+              We design, deploy and manage secure,
+              reliable and scalable ICT infrastructure
+              solutions for businesses across South Africa.
+              From enterprise networking and business WiFi
+              to CCTV surveillance and managed IT services,
+              we help organizations stay connected,
+              protected and productive.
+
+            </p>
+
+            {/* Features */}
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-10">
+
+              <div className="flex flex-col items-center text-center">
+
+                <ShieldCheck className="text-green-400 w-8 h-8 mb-2" />
+
+                <h3 className="text-white font-semibold">
+                  Secure
+                </h3>
+
+                <p className="text-sm text-gray-400">
+                  Enterprise Protection
+                </p>
+
+              </div>
+
+              <div className="flex flex-col items-center text-center">
+
+                <Wifi className="text-green-400 w-8 h-8 mb-2" />
+
+                <h3 className="text-white font-semibold">
+                  Reliable
+                </h3>
+
+                <p className="text-sm text-gray-400">
+                  Maximum Uptime
+                </p>
+
+              </div>
+
+              <div className="flex flex-col items-center text-center">
+
+                <Server className="text-green-400 w-8 h-8 mb-2" />
+
+                <h3 className="text-white font-semibold">
+                  Scalable
+                </h3>
+
+                <p className="text-sm text-gray-400">
+                  Built for Growth
+                </p>
+
+              </div>
+
+              <div className="flex flex-col items-center text-center">
+
+                <Headphones className="text-green-400 w-8 h-8 mb-2" />
+
+                <h3 className="text-white font-semibold">
+                  Support
+                </h3>
+
+                <p className="text-sm text-gray-400">
+                  24/7 Assistance
+                </p>
+
+              </div>
+
+            </div>
+
+            {/* Buttons */}
+
+            <div className="flex flex-wrap gap-5 mt-12">
+
+              <button
+                className="bg-green-600 hover:bg-green-700 transition px-8 py-4 rounded-md text-white font-semibold flex items-center gap-2"
+                onClick={() => navigate("/contact")}
+              >
+                Request Infrastructure Assessment
+
+                <ArrowRight size={18} />
+
+              </button>
+
+              <button
+                onClick={buttonAction}
+                className="border border-white/30 hover:bg-white hover:text-black transition px-8 py-4 rounded-md text-white font-semibold"
+              >
+                {buttonText}
+              </button>
+
+            </div>
+
+          </motion.div>
+
+          {/* RIGHT SIDE */}
+
+          <motion.div
+            initial={{ opacity: 0, x: 80 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: .9 }}
+            className="relative hidden lg:flex justify-end"
+          >
+
+            {/* Glow */}
+
+            <div className="absolute w-[500px] h-[500px] bg-green-500/20 rounded-full blur-[130px]" />
+
+           
+
+          </motion.div>
+
+        </div>
+
       </div>
 
-      {/* Academy Modal */}
-      <FormModal isOpen={isAcademyOpen} onClose={() => setAcademyOpen(false)} title="Academy Application" onSubmit={handleSubmitAcademy}>
-        <input type="text" name="fullName" placeholder="Full Name" required className="border p-2 rounded"/>
-        <input type="tel" name="phone" placeholder="Phone Number" required className="border p-2 rounded"/>
-        <input type="email" name="email" placeholder="Email" required className="border p-2 rounded"/>
-        <input type="text" name="location" placeholder="Location" required className="border p-2 rounded"/>
-        <textarea name="why" placeholder="Why do you want to join?" required className="border p-2 rounded"/>
-        <select name="itBackground" required className="border p-2 rounded">
-          <option value="">Do you have IT background?</option>
-          <option value="Yes">Yes</option>
-          <option value="No">No</option>
+            {/* ===========================
+          Academy Modal
+      ============================ */}
+
+      <FormModal
+        isOpen={isAcademyOpen}
+        onClose={() => setAcademyOpen(false)}
+        title="Academy Application"
+        onSubmit={handleSubmitAcademy}
+      >
+        <input
+          type="text"
+          name="fullName"
+          placeholder="Full Name"
+          required
+          className="border p-3 rounded-lg"
+        />
+
+        <input
+          type="tel"
+          name="phone"
+          placeholder="Phone Number"
+          required
+          className="border p-3 rounded-lg"
+        />
+
+        <input
+          type="email"
+          name="email"
+          placeholder="Email Address"
+          required
+          className="border p-3 rounded-lg"
+        />
+
+        <input
+          type="text"
+          name="location"
+          placeholder="Current Location"
+          required
+          className="border p-3 rounded-lg"
+        />
+
+        <textarea
+          name="why"
+          rows={4}
+          placeholder="Why do you want to join the Academy?"
+          required
+          className="border p-3 rounded-lg"
+        />
+
+        <select
+          name="itBackground"
+          required
+          className="border p-3 rounded-lg"
+        >
+          <option value="">Do you have an IT background?</option>
+          <option>Yes</option>
+          <option>No</option>
         </select>
-        <textarea name="itDetails" placeholder="If yes, explain" className="border p-2 rounded"/>
-        <select name="laptop" required className="border p-2 rounded">
-          <option value="">Do you have a laptop/computer?</option>
-          <option value="Yes">Yes</option>
-          <option value="No">No</option>
+
+        <textarea
+          name="itDetails"
+          rows={3}
+          placeholder="If yes, briefly describe your experience"
+          className="border p-3 rounded-lg"
+        />
+
+        <select
+          name="laptop"
+          required
+          className="border p-3 rounded-lg"
+        >
+          <option value="">Do you own a laptop?</option>
+          <option>Yes</option>
+          <option>No</option>
         </select>
-        <select name="commitment" required className="border p-2 rounded">
-          <option value="">Are you committed to completing the training?</option>
-          <option value="Yes">Yes</option>
-          <option value="No">No</option>
+
+        <select
+          name="commitment"
+          required
+          className="border p-3 rounded-lg"
+        >
+          <option value="">
+            Are you committed to completing the programme?
+          </option>
+
+          <option>Yes</option>
+          <option>No</option>
         </select>
       </FormModal>
 
-      {/* Talent Modal */}
-      <FormModal isOpen={isTalentOpen} onClose={() => setTalentOpen(false)} title="Talent Application" onSubmit={handleSubmitTalent}>
-        <input type="text" name="fullName" placeholder="Full Name" required className="border p-2 rounded"/>
-        <input type="tel" name="phone" placeholder="Phone Number" required className="border p-2 rounded"/>
-        <input type="email" name="email" placeholder="Email" required className="border p-2 rounded"/>
-        <input type="text" name="location" placeholder="Location" required className="border p-2 rounded"/>
-        <select name="training" required className="border p-2 rounded">
-          <option value="">Completed  NetDreamTeam / Cisco training?</option>
-          <option value="Yes">Yes</option>
-          <option value="No">No</option>
+      {/* ===========================
+          Talent Modal
+      ============================ */}
+
+      <FormModal
+        isOpen={isTalentOpen}
+        onClose={() => setTalentOpen(false)}
+        title="Talent Application"
+        onSubmit={handleSubmitTalent}
+      >
+        <input
+          type="text"
+          name="fullName"
+          placeholder="Full Name"
+          required
+          className="border p-3 rounded-lg"
+        />
+
+        <input
+          type="tel"
+          name="phone"
+          placeholder="Phone Number"
+          required
+          className="border p-3 rounded-lg"
+        />
+
+        <input
+          type="email"
+          name="email"
+          placeholder="Email Address"
+          required
+          className="border p-3 rounded-lg"
+        />
+
+        <input
+          type="text"
+          name="location"
+          placeholder="Current Location"
+          required
+          className="border p-3 rounded-lg"
+        />
+
+        <select
+          name="training"
+          required
+          className="border p-3 rounded-lg"
+        >
+          <option value="">
+            Completed BenTechHub / Cisco Training?
+          </option>
+
+          <option>Yes</option>
+          <option>No</option>
         </select>
-        <div className="flex flex-col gap-2 border p-2 rounded">
-          <label>Skills (check all that apply):</label>
-          <label><input type="checkbox" name="skills" value="Networking"/> Networking</label>
-          <label><input type="checkbox" name="skills" value="Troubleshooting"/> Troubleshooting</label>
-          <label><input type="checkbox" name="skills" value="WiFi setup"/> WiFi setup</label>
-          <label><input type="checkbox" name="skills" value="Cabling"/> Cabling</label>
+
+        <div className="border rounded-lg p-4">
+
+          <p className="font-semibold mb-3">
+            Select your skills
+          </p>
+
+          <div className="grid grid-cols-2 gap-3">
+
+            <label className="flex gap-2 items-center">
+              <input
+                type="checkbox"
+                value="Networking"
+                name="skills"
+              />
+              Networking
+            </label>
+
+            <label className="flex gap-2 items-center">
+              <input
+                type="checkbox"
+                value="Troubleshooting"
+                name="skills"
+              />
+              Troubleshooting
+            </label>
+
+            <label className="flex gap-2 items-center">
+              <input
+                type="checkbox"
+                value="WiFi"
+                name="skills"
+              />
+              WiFi Installation
+            </label>
+
+            <label className="flex gap-2 items-center">
+              <input
+                type="checkbox"
+                value="Cabling"
+                name="skills"
+              />
+              Structured Cabling
+            </label>
+
+            <label className="flex gap-2 items-center">
+              <input
+                type="checkbox"
+                value="CCTV"
+                name="skills"
+              />
+              CCTV Installation
+            </label>
+
+            <label className="flex gap-2 items-center">
+              <input
+                type="checkbox"
+                value="Fiber"
+                name="skills"
+              />
+              Fibre Optics
+            </label>
+
+          </div>
+
         </div>
-        <select name="fieldWork" required className="border p-2 rounded">
-          <option value="">Are you available for field work?</option>
-          <option value="Yes">Yes</option>
-          <option value="No">No</option>
+
+        <select
+          name="fieldWork"
+          required
+          className="border p-3 rounded-lg"
+        >
+          <option value="">
+            Available for field work?
+          </option>
+
+          <option>Yes</option>
+          <option>No</option>
         </select>
-        <select name="travel" required className="border p-2 rounded">
-          <option value="">Can you travel?</option>
-          <option value="Yes">Yes</option>
-          <option value="No">No</option>
+
+        <select
+          name="travel"
+          required
+          className="border p-3 rounded-lg"
+        >
+          <option value="">
+            Can you travel across South Africa?
+          </option>
+
+          <option>Yes</option>
+          <option>No</option>
         </select>
-        <textarea name="whySelect" placeholder="Why should we select you?" required className="border p-2 rounded"/>
+
+        <textarea
+          name="why"
+          rows={4}
+          required
+          placeholder="Why should we choose you?"
+          className="border p-3 rounded-lg"
+        />
       </FormModal>
+
     </section>
   );
 }
